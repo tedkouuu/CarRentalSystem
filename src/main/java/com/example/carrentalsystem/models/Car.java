@@ -13,8 +13,10 @@ public class Car {
     @Column(nullable = false, unique = true)
     private String model;
 
+    @Column(nullable = false)
     private boolean isAvailable;
 
+    @Column(nullable = false)
     private double monthlyRent;
 
     public Car(String model, boolean isAvailable, double monthlyRent) {
