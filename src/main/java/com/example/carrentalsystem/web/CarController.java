@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/*
+Note: Front-End is need so the information can come to the controller
+ */
+
 @Controller
 public class CarController {
 
@@ -18,7 +22,7 @@ public class CarController {
         this.carService = carService;
     }
 
-    @PostMapping("/car/add") // This is my idea how the adding should be done. I need front-end, so the data can come
+    @PostMapping("/car/add")
     public String addCar(Car car) {
 
         this.carService.addCar(car);
@@ -39,7 +43,6 @@ public class CarController {
 
         List<Car> allCars = this.carService.getAllCars();
 
-        // Here I can attach the cars in the model, so I can visualise them in the front-end
         model.addAttribute("cars", allCars);
 
         return "cars-all";
@@ -47,8 +50,7 @@ public class CarController {
     }
 
     @GetMapping("/car/get/available")
-    public String geCarAvailableOrNot(Car car) { // In the front end, the user will search for the car and a message is going to pop up if the car is not free
-
+    public String geCarAvailableOrNot(Car car) {
         boolean isAvailable = this.carService.findIfCarIsAvailable(car);
 
         if (isAvailable) {
@@ -60,14 +62,11 @@ public class CarController {
     }
 
     @GetMapping("/car/get/availability")
-    public String getCarAvailability(Car car, Model model) { // In the front end, the user will search for the car and a message is going to pop up if the car is not free
+    public String getCarAvailability(Car car, Model model) {
 
         boolean isAvailable = this.carService.findIfCarIsAvailable(car);
 
         model.addAttribute("carAvailability", isAvailable);
-        /*
-        I have checked for the car's availability, now I can show the information in the front-end
-         */
 
         return "home";
 
